@@ -187,12 +187,6 @@ export type ClinicalDataBinFilter = {
         'start': number
 
 };
-export type ClinicalDataCollection = {
-    'patientClinicalData': Array < ClinicalData >
-
-        'sampleClinicalData': Array < ClinicalData >
-
-};
 export type ClinicalDataCount = {
     'count': number
 
@@ -315,33 +309,6 @@ export type CoExpressionFilter = {
         'sampleIds': Array < string >
 
         'sampleListId': string
-
-};
-export type ContentDisposition = {
-    'attachment': boolean
-
-        'charset': {
-        'registered': boolean
-
-    }
-
-        'creationDate': string
-
-        'filename': string
-
-        'formData': boolean
-
-        'inline': boolean
-
-        'modificationDate': string
-
-        'name': string
-
-        'readDate': string
-
-        'size': number
-
-        'type': string
 
 };
 export type CopyNumberCount = {
@@ -797,45 +764,6 @@ export type GroupStatistics = {
         'standardDeviation': number
 
 };
-export type HttpMethod = {};
-export type HttpRange = {};
-export type HttpStatusCode = {
-    'error': boolean
-
-        'is1xxInformational': boolean
-
-        'is2xxSuccessful': boolean
-
-        'is3xxRedirection': boolean
-
-        'is4xxClientError': boolean
-
-        'is5xxServerError': boolean
-
-};
-export type MediaType = {
-    'parameters': {}
-
-    'charset': {
-        'registered': boolean
-
-    }
-
-    'concrete': boolean
-
-        'qualityValue': number
-
-        'subtype': string
-
-        'subtypeSuffix': string
-
-        'type': string
-
-        'wildcardSubtype': boolean
-
-        'wildcardType': boolean
-
-};
 export type MolecularProfileCaseIdentifier = {
     'caseId': string
 
@@ -1013,201 +941,6 @@ export type ResourceDefinition = {
         'studyId': string
 
 };
-export type ResponseEntityListGenomicDataCountItem = {
-    'body': Array < GenomicDataCountItem >
-
-        'headers': {
-            'host': {
-                'address': {
-                    'address': Array < string >
-
-                        'anyLocalAddress': boolean
-
-                        'canonicalHostName': string
-
-                        'hostAddress': string
-
-                        'hostName': string
-
-                        'linkLocalAddress': boolean
-
-                        'loopbackAddress': boolean
-
-                        'mcglobal': boolean
-
-                        'mclinkLocal': boolean
-
-                        'mcnodeLocal': boolean
-
-                        'mcorgLocal': boolean
-
-                        'mcsiteLocal': boolean
-
-                        'multicastAddress': boolean
-
-                        'siteLocalAddress': boolean
-
-                }
-
-                'hostName': string
-
-                    'hostString': string
-
-                    'port': number
-
-                    'unresolved': boolean
-
-            }
-
-            'accept': Array < MediaType >
-
-                'acceptCharset': Array < {
-                    'registered': boolean
-
-                } >
-
-                'acceptLanguage': Array < {
-                    'range': string
-
-                        'weight': number
-
-                } >
-
-                'acceptLanguageAsLocales': Array < {
-                    'country': string
-
-                        'displayCountry': string
-
-                        'displayLanguage': string
-
-                        'displayName': string
-
-                        'displayScript': string
-
-                        'displayVariant': string
-
-                        'extensionKeys': Array < string >
-
-                        'iso3Country': string
-
-                        'iso3Language': string
-
-                        'language': string
-
-                        'script': string
-
-                        'unicodeLocaleAttributes': Array < string >
-
-                        'unicodeLocaleKeys': Array < string >
-
-                        'variant': string
-
-                } >
-
-                'acceptPatch': Array < MediaType >
-
-                'accessControlAllowCredentials': boolean
-
-                'accessControlAllowHeaders': Array < string >
-
-                'accessControlAllowMethods': Array < HttpMethod >
-
-                'accessControlAllowOrigin': string
-
-                'accessControlExposeHeaders': Array < string >
-
-                'accessControlMaxAge': number
-
-                'accessControlRequestHeaders': Array < string >
-
-                'accessControlRequestMethod': HttpMethod
-
-                'all': {}
-
-                'allow': Array < HttpMethod >
-
-                'basicAuth': string
-
-                'bearerAuth': string
-
-                'cacheControl': string
-
-                'connection': Array < string >
-
-                'contentDisposition': ContentDisposition
-
-                'contentLanguage': {
-                'country': string
-
-                    'displayCountry': string
-
-                    'displayLanguage': string
-
-                    'displayName': string
-
-                    'displayScript': string
-
-                    'displayVariant': string
-
-                    'extensionKeys': Array < string >
-
-                    'iso3Country': string
-
-                    'iso3Language': string
-
-                    'language': string
-
-                    'script': string
-
-                    'unicodeLocaleAttributes': Array < string >
-
-                    'unicodeLocaleKeys': Array < string >
-
-                    'variant': string
-
-            }
-
-                'contentLength': number
-
-                'contentType': MediaType
-
-                'date': number
-
-                'empty': boolean
-
-                'etag': string
-
-                'expires': number
-
-                'ifMatch': Array < string >
-
-                'ifModifiedSince': number
-
-                'ifNoneMatch': Array < string >
-
-                'ifUnmodifiedSince': number
-
-                'lastModified': number
-
-                'location': string
-
-                'origin': string
-
-                'pragma': string
-
-                'range': Array < HttpRange >
-
-                'upgrade': string
-
-                'vary': Array < string >
-
-        }
-
-        'statusCode': HttpStatusCode
-
-        'statusCodeValue': number
-
-};
 export type Sample = {
     'copyNumberSegmentPresent': boolean
 
@@ -1224,6 +957,10 @@ export type Sample = {
         'uniquePatientKey': string
 
         'uniqueSampleKey': string
+
+};
+export type SampleClinicalDataCollection = {
+    'byUniqueSampleKey': {}
 
 };
 export type SampleIdentifier = {
@@ -2242,7 +1979,7 @@ export default class CBioPortalAPIInternal {
      * @method
      * @name CBioPortalAPIInternal#fetchClinicalDataClinicalTableUsingPOST
      * @param {integer} pageSize - Page size of the result list
-     * @param {integer} pageNumber - Page number of the result list
+     * @param {integer} pageNumber - Page number of the result list. Zero represents the first page.
      * @param {string} searchTerm - Search term to filter sample rows. Samples are returned with a partial match to the search term for any sample clinical attribute.
      * @param {string} sortBy - sampleId, patientId, or the ATTR_ID to sorted by
      * @param {string} direction - Direction of the sort
@@ -2311,7 +2048,7 @@ export default class CBioPortalAPIInternal {
      * @method
      * @name CBioPortalAPIInternal#fetchClinicalDataClinicalTableUsingPOST
      * @param {integer} pageSize - Page size of the result list
-     * @param {integer} pageNumber - Page number of the result list
+     * @param {integer} pageNumber - Page number of the result list. Zero represents the first page.
      * @param {string} searchTerm - Search term to filter sample rows. Samples are returned with a partial match to the search term for any sample clinical attribute.
      * @param {string} sortBy - sampleId, patientId, or the ATTR_ID to sorted by
      * @param {string} direction - Direction of the sort
@@ -2326,7 +2063,7 @@ export default class CBioPortalAPIInternal {
         'studyViewFilter' ? : StudyViewFilter,
         $queryParameters ? : any,
             $domain ? : string
-    }): Promise < ClinicalDataCollection > {
+    }): Promise < SampleClinicalDataCollection > {
         return this.fetchClinicalDataClinicalTableUsingPOSTWithHttpInfo(parameters).then(function(response: request.Response) {
             return response.body;
         });
@@ -5616,15 +5353,16 @@ export default class CBioPortalAPIInternal {
      * @param {} genomicDataCountFilter - A web service for supplying JSON formatted data to cBioPortal clients. Please note that this API is currently in beta and subject to change.
      */
     fetchMutationDataCountsUsingPOST(parameters: {
-        'projection' ? : "ID" | "SUMMARY" | "DETAILED" | "META",
-        'genomicDataCountFilter' ? : GenomicDataCountFilter,
-        $queryParameters ? : any,
-            $domain ? : string
-    }): Promise < ResponseEntityListGenomicDataCountItem > {
-        return this.fetchMutationDataCountsUsingPOSTWithHttpInfo(parameters).then(function(response: request.Response) {
-            return response.body;
-        });
-    };
+            'projection' ? : "ID" | "SUMMARY" | "DETAILED" | "META",
+            'genomicDataCountFilter' ? : GenomicDataCountFilter,
+            $queryParameters ? : any,
+                $domain ? : string
+        }): Promise < Array < GenomicDataCountItem >
+        > {
+            return this.fetchMutationDataCountsUsingPOSTWithHttpInfo(parameters).then(function(response: request.Response) {
+                return response.body;
+            });
+        };
     getAllReferenceGenomeGenesUsingGETURL(parameters: {
         'genomeName': string,
         $queryParameters ? : any
